@@ -33,7 +33,11 @@
 | 역할          | 이름 |  기술 스택 배지                                                                 | 주요 관심 분야                          |
 |---------------|------|-----------------------------------------------------------------------|----------------------------------------|
 | **Project Manager** | 이청록 | ![LLM FoundationModel](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/PyTorch-EE4C2C) | AI/추천 서비스 엔지니어링            |
-| **Member** | 멤버1 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| **Member** | 변홍균 | ![python](https://img.shields.io/badge/SQL-Advanced-003B57) ![math](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| **Member** | 양문규 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![query](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| **Member** | 박지우 | ![rag](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| **Member** | 문정하 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![llm](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| **Member** | 이현준 | ![comthick](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
 
 
 ## 🚀 프로젝트 로드맵 (Project Roadmap)
