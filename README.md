@@ -36,7 +36,6 @@
 | **Member** | 변홍균 | ![python](https://img.shields.io/badge/SQL-Advanced-003B57) ![math](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
 | **Member** | 양문규 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![query](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
 | **Member** | 박지우 | ![rag](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
-| **Member** | 문정하 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![llm](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
 | **Member** | 이현준 | ![comthick](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
 
 
