@@ -3,7 +3,6 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import streamlit as st
 import pandas as pd
-import argparse
 import os
 
 # .env 환경변수 불러오기
@@ -22,10 +21,8 @@ engine = create_engine(DB_URL, echo=True, future=True)
 API_KEY = os.getenv("OPENAI_API_KEY") # 개인 api 키
 client = OpenAI(api_key=API_KEY)
 
-# argument
-parser = argparse.ArgumentParser(description="text2sql")
-parser.add_argument('first', '--run_special_task', type=int, default=0, help='특정 테이블 작업 실행 여부 (0: 디폴트, 실행 안함; 1: 실행함)')
-args = parser.parse_args()
+# argument - 환경변수로 초기화 여부 확인
+INIT_TABLE_DOCS = os.getenv("INIT_TABLE_DOCS", "0") == "1"
 
 def run_query(query: str, params: dict = None):
     with engine.connect() as conn:
@@ -124,7 +121,7 @@ def insert_doc(name: str):
     
 
 ############################# 초기 테이블 작업: 임베딩 삽입 시작 #############################
-if args.run_special_task == 1:
+if INIT_TABLE_DOCS:
     print("초기 테이블 작업: 임베딩 삽입 시작.")
     tables = make_table_desc_dict().keys()
     for table in make_table_desc_dict():
