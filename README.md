@@ -149,3 +149,77 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 - 체크박스(✅)와 표를 적절히 활용하면 진행 상황 한눈에 파악이 쉽습니다.
 - ‘빌더’와 ‘러너’의 역할 분담과 상호 피드백 문화 강화에 README 내 문장으로 강조를 절대 잊지 마세요.
 - README가 단순 안내서 이상으로 공동체 철학과 가치를 담는 협업 선언문임을 인지하고, 누구나 읽고 이해하기 쉽도록 간결 명료하게 작성하세요.
+
+---
+## 초기 환경 셋팅
+
+> 클론
+```
+git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
+cd Query-VendingMachine
+```
+---
+      
+>파이썬 가상환경
+```
+python -m venv .venv 
+source .venv/bin/activate
+```
+
+---
+>postgres 컨테이너 실행
+```
+
+docker compose up -d
+```
+
+---
+>dvdrental 파일 postgres 컨테이너에 설치
+```
+# 컨테이너 내부 DB 접속 확인
+docker exec -it postgres psql -U admin -d db 
+# 나가기
+\q 
+
+#  빈 데이터베이스 생성
+docker exec -it postgres psql -U admin -d db -c "CREATE DATABASE dvdrental;" 
+
+# 컨테이너 내부에 dvdrental.tar파일 복사
+docker cp dvdrental.tar postgres:/tmp/dvdrental.tar 
+
+# 데이터베이스 복원 설치
+docker exec -it postgres pg_restore -U admin -d dvdrental /tmp/dvdrental.tar 
+
+
+# 테이블 확인
+docker exec -it postgres psql -U admin -d dvdrental -c "\dt" 
+
+```
+
+---
+> 패키지 설치
+```
+pip install sqlalchemy psycopg2-binary openai
+```
+
+---
+>text2sql 실행
+```
+python main.py
+```
+
+---
+>테스트를 위한 주피터랩 커널
+```
+# 설치
+pip install jupyterlab ipykernel
+
+# 커널연결
+python -m ipykernel install --user --name=Query-VendingMachine --display-name="Query-VendingMachine (venv)"
+
+# 실행
+jupyter lab
+```
+
+
+

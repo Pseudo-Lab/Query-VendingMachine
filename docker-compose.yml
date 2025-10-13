@@ -3,7 +3,7 @@ version: "3.9"
 services:
   db:
     image: pgvector/pgvector:pg17
-    container_name: text2sql-postgres
+    container_name: postgres
     restart: always
     environment:
       POSTGRES_USER: admin
