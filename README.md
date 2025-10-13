@@ -199,7 +199,7 @@ docker exec -it postgres psql -U admin -d dvdrental -c "\dt"
 ---
 > 패키지 설치
 ```
-pip install sqlalchemy psycopg2-binary openai
+pip install -r requirements.txt
 ```
 
 ---
