@@ -231,10 +231,12 @@ pip install -r requirements.txt
 ---
 >text2sql 실행
 ```
-# 처음 실행시! (반드시 1을 붙여주어 초기 테이블 관련 벡터를 저장.)
-streamlit run main.py -- first 1
+# .env 파일에 OPENAI_API_KEY 입력
 
-# 두번째 부터 실행시 매개변수 제거 후 실행
+# 처음 실행시! (초기 테이블 벡터 임베딩 생성)
+INIT_TABLE_DOCS=1 streamlit run main.py
+
+# 두번째부터 실행시
 streamlit run main.py 
 ```
 
