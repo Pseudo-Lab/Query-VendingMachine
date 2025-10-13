@@ -197,6 +197,32 @@ docker exec -it postgres psql -U admin -d dvdrental -c "\dt"
 ```
 
 ---
+
+> pgvector 설정
+```
+# postgres 진입
+docker exec -it postgres psql -U admin -d dvdrental
+
+# vector 기능 확장 활성화
+CREATE EXTENSION IF NOT EXISTS vector; 
+
+# 활성화 확인.
+\dx 
+
+
+# 벡터 테이블 table_docs 생성
+CREATE TABLE table_docs (
+    id bigserial PRIMARY KEY,
+    name text,              -- 테이블명
+    description text,       -- 설명 + DDL
+    embedding vector(1536)  -- 임베딩
+);
+
+# 나가기
+\q
+```
+
+---
 > 패키지 설치
 ```
 pip install -r requirements.txt
@@ -205,7 +231,11 @@ pip install -r requirements.txt
 ---
 >text2sql 실행
 ```
-python main.py
+# 처음 실행시에만 반드시 1을 붙여주어 테이블 관련 벡터를 저장.
+python main.py -1
+
+# 나중실행시 매개변수 제거 후 실행
+python main.py 
 ```
 
 ---
@@ -220,6 +250,5 @@ python -m ipykernel install --user --name=Query-VendingMachine --display-name="Q
 # 실행
 jupyter lab
 ```
-
 
 
