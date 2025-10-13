@@ -24,7 +24,7 @@ client = OpenAI(api_key=API_KEY)
 
 # argument
 parser = argparse.ArgumentParser(description="text2sql")
-parser.add_argument('-1', '--run_special_task', type=int, default=0, help='특정 테이블 작업 실행 여부 (0: 디폴트, 실행 안함; 1: 실행함)')
+parser.add_argument('first', '--run_special_task', type=int, default=0, help='특정 테이블 작업 실행 여부 (0: 디폴트, 실행 안함; 1: 실행함)')
 args = parser.parse_args()
 
 def run_query(query: str, params: dict = None):

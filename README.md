@@ -231,13 +231,17 @@ pip install -r requirements.txt
 ---
 >text2sql 실행
 ```
-# 처음 실행시에만 반드시 1을 붙여주어 테이블 관련 벡터를 저장.
-python main.py -1
+# 처음 실행시! (반드시 1을 붙여주어 초기 테이블 관련 벡터를 저장.)
+streamlit run main.py -- first 1
 
-# 나중실행시 매개변수 제거 후 실행
-python main.py 
+# 두번째 부터 실행시 매개변수 제거 후 실행
+streamlit run main.py 
 ```
 
+---
+---
+---
+---
 ---
 >테스트를 위한 주피터랩 커널
 ```
