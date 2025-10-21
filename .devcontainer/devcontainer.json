@@ -1,0 +1,44 @@
+{
+    "name": "Dev AI API Server",
+    "dockerComposeFile": [
+        "../docker/docker-compose.yml"
+    ],
+    "service": "dev",
+    "remoteUser": "developer",
+    "workspaceFolder": "/home/developer/workspace",
+    "remoteEnv": {
+        "UV_LINK_MODE": "copy"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.organizeImports": "explicit",
+                        "source.fixAll": "explicit"
+                    }
+                },
+                "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+                "ruff.path": [
+                    "${workspaceFolder}/.venv/bin/ruff"
+                ],
+                "ruff.organizeImports": true
+            }
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "moby": true
+        }
+    },
+    "postCreateCommand": "bash -lc 'uv venv && if [ -f pyproject.toml ]; then uv sync --all-groups; else if [ -f requirements-dev.txt ]; then uv pip install -r requirements-dev.txt; elif [ -f requirements.txt ]; then uv pip install -r requirements.txt; fi; fi && if [ -f .pre-commit-config.yaml ]; then uv run pre-commit install; fi'"
+}

@@ -159,18 +159,9 @@ git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
 cd Query-VendingMachine
 ```
 ---
-      
->파이썬 가상환경
+>개발환경 및 postgres 컨테이너 실행
 ```
-python -m venv .venv 
-source .venv/bin/activate
-```
-
----
->postgres 컨테이너 실행
-```
-
-docker compose up -d
+docker compose -f docker/docker-compose.yml up -d
 ```
 
 ---
@@ -193,7 +184,6 @@ docker exec -it postgres pg_restore -U admin -d dvdrental /tmp/dvdrental.tar
 
 # 테이블 확인
 docker exec -it postgres psql -U admin -d dvdrental -c "\dt" 
-
 ```
 
 ---
@@ -223,23 +213,23 @@ CREATE TABLE table_docs (
 ```
 
 ---
-> 패키지 설치
+>UV 패키지 설치
 ```
-pip install -r requirements.txt
+uv sync
 ```
 
 ---
 >text2sql 실행
 ```
-# .env 파일에 OPENAI_API_KEY 입력
+# .env.template에 맞게 KEY 입력
 
 # 처음 실행시! (초기 테이블 벡터 임베딩 생성)
-INIT_TABLE_DOCS=1 streamlit run main.py
+INIT_TABLE_DOCS=1 uv streamlit run main.py
 
 # 두번째부터 실행시
-streamlit run main.py 
+uv streamlit run main.py 
 ```
-
+<!-- 
 ---
 >테스트를 위한 주피터랩 커널
 ```
@@ -251,7 +241,7 @@ python -m ipykernel install --user --name=Query-VendingMachine --display-name="Q
 
 # 실행
 jupyter lab
-```
+``` -->
 
 
 
