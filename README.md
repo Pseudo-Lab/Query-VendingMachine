@@ -153,6 +153,8 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 ---
 ## 초기 환경 셋팅
 
+ 
+
 > 클론
 ```
 git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
@@ -162,86 +164,32 @@ cd Query-VendingMachine
       
 >파이썬 가상환경
 ```
-python -m venv .venv --python 3.11
+python -m venv .venv
 source .venv/bin/activate
 ```
 
 ---
->postgres 컨테이너 실행
+>컨테이너 실행
 ```
 
 docker compose up -d
 ```
+db 컨테이너는 5432포트, streamlit은 8501포트로 실행됩니다.
+```
+
+> 주의사항)
+  재실행시에 data 폴더를 제거하고 실행해주세요.
+
+> 추가사항)
+  IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
+  test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
+  의존성 설치.
+  streamlit tabs 기능으로 두번째 탭에 실험환경 트래킹 환경 개발.
+
+
 
 ---
->dvdrental 파일 postgres 컨테이너에 설치
-```
-# 컨테이너 내부 DB 접속 확인
-docker exec -it postgres pg_restore -U admin -d dvdrental --no-owner --role=admin /tmp/dvdrental.tar
-# 나가기
-\q 
-
-#  빈 데이터베이스 생성
-docker exec -it postgres psql -U admin -d db -c "CREATE DATABASE dvdrental;" 
-
-# 컨테이너 내부에 dvdrental.tar파일 복사
-docker cp dvdrental.tar postgres:/tmp/dvdrental.tar 
-
-# 데이터베이스 복원 설치
-docker exec -it postgres pg_restore -U admin -d dvdrental /tmp/dvdrental.tar 
-
-
-# 테이블 확인
-docker exec -it postgres psql -U admin -d dvdrental -c "\dt" 
-
-```
-
----
-
-> pgvector 설정
-```
-# postgres 진입
-docker exec -it postgres psql -U admin -d dvdrental
-
-# vector 기능 확장 활성화
-CREATE EXTENSION IF NOT EXISTS vector; 
-
-# 활성화 확인.
-\dx 
-
-
-# 벡터 테이블 table_docs 생성
-CREATE TABLE table_docs (
-    id bigserial PRIMARY KEY,
-    name text,              -- 테이블명
-    description text,       -- 설명 + DDL
-    embedding vector(1536)  -- 임베딩
-);
-
-# 나가기
-\q
-```
-
----
-> 패키지 설치
-```
-uv pip install -r requirements.txt
-```
-
----
->text2sql 실행
-```
-# .env 파일에 OPENAI_API_KEY 입력
-
-# 처음 실행시! (초기 테이블 벡터 임베딩 생성)
-INIT_TABLE_DOCS=1 streamlit run main.py
-
-# 두번째부터 실행시
-streamlit run main.py 
-```
-
----
->테스트를 위한 주피터랩 커널
+>(참고) 테스트를 위한 주피터랩 커널
 ```
 # 설치
 pip install jupyterlab ipykernel
