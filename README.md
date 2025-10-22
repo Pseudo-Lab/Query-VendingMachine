@@ -175,12 +175,12 @@ docker compose up -d
 
 ---
 
->주의사항)
+## 주의사항)
 
   -재실행시에 data 폴더를 제거하고 실행해주세요.
 
 ---
->추가사항)
+## 추가사항)
 
   -IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
   -test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
@@ -216,7 +216,7 @@ docker compose up -d
 
 ---
 
->(참고) 테스트를 위한 주피터랩 커널
+## (참고) 테스트를 위한 주피터랩 커널
 ```
 # 설치
 pip install jupyterlab ipykernel
