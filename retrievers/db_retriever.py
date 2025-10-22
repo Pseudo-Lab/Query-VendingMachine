@@ -55,7 +55,7 @@ class DVDRentalRetriever(BaseRetriever):
             ORDER BY embedding <=> (:query_emb)::vector
             LIMIT :limit;
         """
-        results = run_query(sql, {"query_emb": query_emb, "limit": self.limit})
+        results = run_query(sql, {"query_emb": query_emb, "limit": self.limit}, dvd=False)
 
         log_step(
             "1-2: 벡터 검색 완료",

@@ -21,22 +21,21 @@
 
 
 ## 🌟 프로젝트 목표 (Project Vision)
-"구현부터 실험까지 함께 공부하는 Text2Sql 스터디"
-- 오픈소스 프로젝트 — Text2Sql 스터디 및 구현 프로젝트
-- 개인 성장과 집단 지혜의 시너지 창출
-- 오픈소스 정신을 바탕으로 한 지식 공유 문화
-- 실패를 성공의 디딤돌로 만드는 실험적 접근
+### "Text2SQL 기초 구현부터 실험까지 함께 공부하는 Text2Sql 스터디"
+- Text2SQL의 환경을 직접 구축
+- 실무, 논문 아이디어를 적용한 구현 및 실험
+- 실제 업무의 적용할 아이디어와 노하우 정리
 - [프로젝트 계획 노션 페이지](https://www.notion.so/chanrankim/Text2Sql-255963ffa3ee80a688b7c082b905e551?d=1ba963ffa3ee83db9e6f83f9a30be927)
 
 ## 🧑 역동적인 팀 소개 (Dynamic Team)
 
-| 역할          | 이름 |  기술 스택 배지                                                                 | 주요 관심 분야                          |
-|---------------|------|-----------------------------------------------------------------------|----------------------------------------|
-| **Project Manager** | 이청록 | ![LLM FoundationModel](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/PyTorch-EE4C2C) | AI/추천 서비스 엔지니어링            |
-| **Member** | 변홍균 | ![python](https://img.shields.io/badge/SQL-Advanced-003B57) ![math](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
-| **Member** | 양문규 | ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) ![query](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
-| **Member** | 박지우 | ![rag](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
-| **Member** | 이현준 | ![comthick](https://img.shields.io/badge/SQL-Advanced-003B57) ![BigQuery](https://img.shields.io/badge/BigQuery-4285F4) | 관심분야1                  |
+| 역할          | 이름 | 기술 스택 배지                                                                                                                                                                   | 주요 관심 분야       |
+|---------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| **Project Manager** | 이청록 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                       | AI/추천 서비스 엔지니어링 |
+| **Member** | 변홍균 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) | 데이터 분석, 엔지니어링  |
+| **Member** | 양문규 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                            | 머신러닝 엔지니어      |
+| **Member** | 박지우 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                         | 데이터 엔지니어링      |
+| **Member** | 이현준 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                    | LLM 프로덕트 전문가   |
 
 
 ## 🚀 프로젝트 로드맵 (Project Roadmap)
@@ -75,31 +74,31 @@ class CollaborationFramework:
 **2024 주요 KPI**  
 | 지표                     | 목표치 | 현재 달성률 |
 |--------------------------|--------|-------------|
-| 커밋 수                    | 500  | 0%         |
-| 쿼리 정확도                 | 90%    | 0%         | 
+| 커밋 수                    | 500  | 5%         |
+| 쿼리 정확도                 | 90%    | 50%         | 
 
 
 ## 💻 주차별 활동 (Activity History)
 
-| 날짜 | 내용 | 결과물 | 
-| -------- | -------- | ---- |
-| 2025/09/09 |  1주차      |  미정    |
-| 2025/09/16 |  2주차 | 미정 | 
-| 2025/09/23 |  매지컬 위크 | 미정 | 
-| 2025/09/30 |  3주차 | 미정 | 
-| 2025/10/07 |  4주차 | 미정 | 
-| 2025/10/14 |  5주차 | 미정 | 
-| 2025/10/21 |  6주차 | 미정 | 
-| 2025/10/28 |  7주차 | 미정 | 
-| 2025/11/04 |  8주차 | 미정 | 
-| 2025/11/11 |  9주차 | 미정 | 
-| 2025/11/18 |  10주차 | 미정 | 
-| 2025/11/25 |  11주차 | 미정 | 
-| 2025/12/02 |  12주차 | 미정 | 
-| 2025/12/09 |  13주차 | 미정 | 
-| 2025/12/16 |  14주차 | 미정 | 
-| 2025/12/23 |  15주차 | 미정 | 
-| 2025/12/30 |  16주차 | 미정 | 
+| 날짜 | 내용 | 결과물                  | 
+| -------- | -------- |----------------------|
+| 2025/09/09 |  1주차      | OT                   |
+| 2025/09/16 |  2주차 | 리서치 결과 공유            | 
+| 2025/09/23 |  매지컬 위크 | t2s 환경 리서치 및 개발 결과 공유 | 
+| 2025/09/30 |  3주차 | t2s 환경 리서치 및 개발 결과 공유 | 
+| 2025/10/07 |  4주차 | t2s 환경 리서치 및 개발 결과 공유 | 
+| 2025/10/14 |  5주차 | t2s 환경 리서치 및 개발 결과 공유 | 
+| 2025/10/21 |  6주차 | t2s 환경 리서치 및 개발 결과 공유 | 
+| 2025/10/28 |  7주차 | 미정                   | 
+| 2025/11/04 |  8주차 | 미정                   | 
+| 2025/11/11 |  9주차 | 미정                   | 
+| 2025/11/18 |  10주차 | 미정                   | 
+| 2025/11/25 |  11주차 | 미정                   | 
+| 2025/12/02 |  12주차 | 미정                   | 
+| 2025/12/09 |  13주차 | 미정                   | 
+| 2025/12/16 |  14주차 | 미정                   | 
+| 2025/12/23 |  15주차 | 미정                   | 
+| 2025/12/30 |  16주차 | 미정                   | 
 
 
 
@@ -158,108 +157,76 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
 cd Query-VendingMachine
 ```
----
       
 >파이썬 가상환경
 ```
-python -m venv .venv --python 3.11
+python -m venv .venv
 source .venv/bin/activate
 ```
 
----
->postgres 컨테이너 실행
+>컨테이너 실행
 ```
-
+# .env 폴더에 본인의 API KEY를 반드시 입력한 다음에 아래의 명령어를 실행해주세요.
 docker compose up -d
 ```
 
 ---
->dvdrental 파일 postgres 컨테이너에 설치
-```
-# 컨테이너 내부 DB 접속 확인
-docker exec -it postgres pg_restore -U admin -d dvdrental --no-owner --role=admin /tmp/dvdrental.tar
-# 나가기
-\q 
 
-#  빈 데이터베이스 생성
-docker exec -it postgres psql -U admin -d db -c "CREATE DATABASE dvdrental;" 
+## 주의사항)
 
-# 컨테이너 내부에 dvdrental.tar파일 복사
-docker cp dvdrental.tar postgres:/tmp/dvdrental.tar 
+  - 재실행시에 data 폴더를 반드시 제거하고 실행해주세요.
 
-# 데이터베이스 복원 설치
-docker exec -it postgres pg_restore -U admin -d dvdrental /tmp/dvdrental.tar 
+  - 재실행시에 init/.init_table_docs_done 파일을 반드시 제거하고 실행해주세요.
 
+---
+## 추가사항)
 
-# 테이블 확인
-docker exec -it postgres psql -U admin -d dvdrental -c "\dt" 
+  -IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
+  -test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
+  -의존성 설치.
+  -streamlit tabs 기능으로 두번째 탭에 실험환경 트래킹 환경 개발.
 
-```
 
 ---
 
-> pgvector 설정
-```
-# postgres 진입
-docker exec -it postgres psql -U admin -d dvdrental
 
-# vector 기능 확장 활성화
-CREATE EXTENSION IF NOT EXISTS vector; 
+## 📁 주요 디렉토리 구조 및 설명
+#### chains/
+- 자연어 → SQL 변환을 위한 LangChain 기반 파이프라인(체인) 모듈을 포함합니다.
+(예: RAG 체인, SQL 생성 체인 등)
 
-# 활성화 확인.
-\dx 
+#### config/
+- LLM, 데이터베이스 등 프로젝트 전역 설정 파일을 관리합니다.
 
 
-# 벡터 테이블 table_docs 생성
-CREATE TABLE table_docs (
-    id bigserial PRIMARY KEY,
-    name text,              -- 테이블명
-    description text,       -- 설명 + DDL
-    embedding vector(1536)  -- 임베딩
-);
+#### init/
+- 초기 데이터베이스 및 임베딩 테이블 생성, 초기화 스크립트가 위치합니다.
 
-# 나가기
-\q
-```
 
----
-> 패키지 설치
-```
-uv pip install -r requirements.txt
-```
+#### prompts/
+- LLM 프롬프트 템플릿을 별도 파일로 관리하여, 프롬프트 수정 및 버전관리가 용이합니다.
+
+
+#### retrievers/
+- 데이터베이스 테이블 메타정보 벡터 검색 등, LangChain Retriever 인터페이스 구현체가 위치합니다.
+
+#### utils/
+- DB 유틸리티, 로깅 등 공통적으로 사용하는 함수 및 도구성 코드가 포함됩니다.
 
 ---
->text2sql 실행
-```
-# .env 파일에 OPENAI_API_KEY 입력
 
-# 처음 실행시! (초기 테이블 벡터 임베딩 생성)
-INIT_TABLE_DOCS=1 streamlit run main.py
-
-# 두번째부터 실행시
-streamlit run main.py 
-```
-
----
->테스트를 위한 주피터랩 커널
+## (참고) 테스트를 위한 주피터랩 커널
 ```
 # 설치
 pip install jupyterlab ipykernel
+```
 
+```
 # 커널연결
 python -m ipykernel install --user --name=Query-VendingMachine --display-name="Query-VendingMachine (venv)"
+```
 
+```
 # 실행
 jupyter lab
 ```
-
-
-
-
-
-
----
-
-## database: dvdrental
-
-![Uploading image.png…]()

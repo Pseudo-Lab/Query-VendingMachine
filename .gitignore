@@ -3,3 +3,5 @@
 .ipynb_checkpoints/
 main.ipynb
 ./postgres-data
+__pycache__/
+*.py[cod]

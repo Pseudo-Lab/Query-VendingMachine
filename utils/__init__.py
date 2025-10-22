@@ -8,7 +8,8 @@ from .db_utils import (
     extract_ddl,
     make_table_desc_dict,
     insert_doc,
-    engine,
+    engine_emb,
+    engine_dvd,
     client,
 )
 from .logging_utils import log_step
@@ -20,7 +21,8 @@ __all__ = [
     "extract_ddl",
     "make_table_desc_dict",
     "insert_doc",
-    "engine",
+    "engine_emb",
+    "engine_dvd",
     "client",
     "log_step",
 ]
