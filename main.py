@@ -1,32 +1,9 @@
-"""
-Text2SQL 데모 - LangChain 기반 구현
-
-자연어 질문을 SQL 쿼리로 변환하고 실행하는 Streamlit 애플리케이션입니다.
-"""
 import streamlit as st
 import pandas as pd
-import os
-from dotenv import load_dotenv
 
 # LangChain 모듈 임포트
 from chains.text_to_sql_chain import invoke_text_to_sql_chain
-from utils import run_query, insert_doc, make_table_desc_dict, log_step, engine
-
-# .env 환경변수 불러오기
-load_dotenv()
-
-# 초기 테이블 docs 설정
-INIT_TABLE_DOCS = os.getenv("INIT_TABLE_DOCS", "0") == "1"
-
-
-############################# 초기 테이블 작업: 임베딩 삽입 시작 #############################
-if INIT_TABLE_DOCS:
-    print("초기 테이블 작업: 임베딩 삽입 시작.")
-    tables = make_table_desc_dict().keys()
-    for table in make_table_desc_dict():
-        insert_doc(table)
-    print("초기 테이블 작업: 임베딩 삽입 완료.")
-#######################################################################################
+from utils import run_query, log_step
 
 
 def main():
@@ -60,7 +37,7 @@ def main():
                 log_step("Step 7: SQL 쿼리 실행 중...", {"SQL": sql})
 
                 # SQL 실행
-                rows = run_query(sql)
+                rows = run_query(query=sql, dvd=True)
                 df = pd.DataFrame(rows)
 
                 log_step(
