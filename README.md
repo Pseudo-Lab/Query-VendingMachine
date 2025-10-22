@@ -162,7 +162,7 @@ cd Query-VendingMachine
       
 >파이썬 가상환경
 ```
-python -m venv .venv 
+python -m venv .venv --python 3.11
 source .venv/bin/activate
 ```
 
@@ -177,7 +177,7 @@ docker compose up -d
 >dvdrental 파일 postgres 컨테이너에 설치
 ```
 # 컨테이너 내부 DB 접속 확인
-docker exec -it postgres psql -U admin -d db 
+docker exec -it postgres pg_restore -U admin -d dvdrental --no-owner --role=admin /tmp/dvdrental.tar
 # 나가기
 \q 
 
@@ -225,7 +225,7 @@ CREATE TABLE table_docs (
 ---
 > 패키지 설치
 ```
-pip install -r requirements.txt
+uv pip install -r requirements.txt
 ```
 
 ---

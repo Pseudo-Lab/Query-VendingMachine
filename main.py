@@ -1,124 +1,23 @@
-from sqlalchemy import create_engine, text
-from dotenv import load_dotenv
-from openai import OpenAI
+"""
+Text2SQL 데모 - LangChain 기반 구현
+
+자연어 질문을 SQL 쿼리로 변환하고 실행하는 Streamlit 애플리케이션입니다.
+"""
 import streamlit as st
 import pandas as pd
 import os
+from dotenv import load_dotenv
+
+# LangChain 모듈 임포트
+from chains.text_to_sql_chain import invoke_text_to_sql_chain
+from utils import run_query, insert_doc, make_table_desc_dict, log_step, engine
 
 # .env 환경변수 불러오기
 load_dotenv()
 
-# db
-DB_USER = os.getenv("DB_USER")
-DB_PASS = os.getenv("DB_PASS")
-DB_HOST = os.getenv("DB_HOST")
-DB_PORT = os.getenv("DB_PORT")
-DB_NAME = os.getenv("DB_NAME")
-DB_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DB_URL, echo=True, future=True)
-
-# external api
-API_KEY = os.getenv("OPENAI_API_KEY") # 개인 api 키
-client = OpenAI(api_key=API_KEY)
-
-# argument - 환경변수로 초기화 여부 확인
+# 초기 테이블 docs 설정
 INIT_TABLE_DOCS = os.getenv("INIT_TABLE_DOCS", "0") == "1"
 
-def run_query(query: str, params: dict = None):
-    with engine.connect() as conn:
-        result = conn.execute(text(query), params or {})
-        return [dict(row._mapping) for row in result]
-
-def run_command(query: str, params: dict = None):
-    with engine.begin() as conn:
-        conn.execute(text(query), params or {})
-
-def get_embedding(text:str, model:str="text-embedding-3-small") -> list[float]:
-    # dims: 1536
-    response = client.embeddings.create(
-        input=text,
-        model=model
-    )
-    embedding = response.data[0].embedding
-    return embedding
-
-def extract_ddl(table_name):
-    ddl_query = f"""SELECT 
-        column_name, 
-        data_type,
-        is_nullable,
-        column_default
-    FROM 
-        information_schema.columns
-    WHERE 
-        table_schema = 'public' AND table_name = '{table_name}';"""
-    
-    result = run_query(ddl_query)
-
-    column_dict = {
-        # ✅ 수정: 리스트 ["column_name"] 대신 v["column_name"] (문자열 값) 사용
-        v["column_name"]:{ 
-            "data_type": v["data_type"],
-            "is_nullable": v["is_nullable"],
-            "column_default": v["column_default"]
-        } for v in result
-    }
-
-    return column_dict
-
-def make_table_desc_dict():
-    # dvdrental 속 테이블들에 대한 간단한 설명을 작성한 메타 정보.
-    table_desc_dict = { 
-        "actor": "contains actors data including first name and last name.",
-        "film": "contains films data such as title, release year, length, rating, etc.",
-        "film_actor": "contains the relationships between films and actors.",
-        "category": "contains film’s categories data.",
-        "film_category": "containing the relationships between films and categories.",
-        "store": "contains the store data including manager staff and address.",
-        "inventory": "stores inventory data.",
-        "rental": "stores rental data.",
-        "payment": "stores customer’s payments.",
-        "staff": "stores staff data.",
-        "customer": "stores customer’s data.",
-        "address": "stores address data for staff and customers.",
-        "city": "stores the city names.",
-        "country": "stores the country names."
-    }
-    return table_desc_dict
-    
-def insert_doc(name: str):
-    """테이블명, DDL, 짧은 설명을 합쳐서 하나의 문서로 저장"""
-    # 설명 + DDL 합치기
-    table_desc_dict = make_table_desc_dict()
-    ddl = extract_ddl(name)
-    summary = table_desc_dict[name]
-    
-    doc_text = f"""
-    <Description>
-    
-    {summary}
-    
-    </Description>
-
-
-
-    <DDL>
-    
-    {ddl}
-    
-    </DDL>
-    
-    """
-    embedding = get_embedding(doc_text)
-
-    run_command(
-        """
-        INSERT INTO table_docs (name, description, embedding)
-        VALUES (:name, :description, :embedding)
-        """,
-        {"name": name, "description": doc_text, "embedding": embedding}
-    )
-    
 
 ############################# 초기 테이블 작업: 임베딩 삽입 시작 #############################
 if INIT_TABLE_DOCS:
@@ -130,91 +29,80 @@ if INIT_TABLE_DOCS:
 #######################################################################################
 
 
-def search_docs(query: str, limit: int = 1):
-    # 질의 → 유사 문서 검색
-    query_emb = get_embedding(query)
-    sql = """
-        SELECT id, name, description,
-               embedding <=> (:query_emb)::vector AS distance
-        FROM table_docs
-        ORDER BY embedding <=> (:query_emb)::vector
-        LIMIT :limit;
-    """
-    return run_query(sql, {"query_emb": query_emb, "limit": limit})
+def main():
+    """Streamlit 메인 애플리케이션"""
+    st.title("📝 Text2SQL Demo with LangChain")
 
-def clean_sql_output(raw: str) -> str:
-    import re
-    return re.sub(r"^```sql\n|\n```$", "", raw.strip())
-
-def generate_sql(natural_query: str, limit: int = 2):
-    # 1. 유사 테이블 검색
-    results = search_docs(natural_query, limit=limit)
-    name = results[0]["name"] if results else ""
-    context = results[0]["description"] if results else ""
-
-    # 2. LLM 프롬프트 구성
-    system_prompt = """You are an expert SQL generator.
-    
-    You will be given:
-    1. A natural language query from the user.
-    2. A context object where each key is a table name and its value is text that includes:
-       - A <Description> ... </Description> block: short natural language description of the table.
-       - A <DDL> ... </DDL> block: the schema of that table, with column names, data types, and constraints.
-    
-    Your task:
-    - Generate a valid SQL query that answers the natural language query.
-    - Use only the provided tables and columns.
-    - Do not invent tables or columns that are not in the context.
-    - Return only the SQL query, nothing else.
-    """
-
-    
-    user_prompt = f"""
-
-    <name>
-    the name of the table is `{name}` .
-    </name>
-
-    <Question>
-    {natural_query}
-    </Question>
-
-
-    <Context>
-    {context}
-    </Context>
-    
-    """
-
-    # 3. OpenAI 호출
-    resp = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_prompt},
-        ],
-        temperature=0.5,
-        max_completion_tokens=300,
+    # 사용자 입력
+    natural_query = st.text_input(
+        "Enter your question:",
+        "List the title and release year of movies.",
     )
-    print("-------")
-    print(user_prompt)
-    print("-------")
-    
-    return resp.choices[0].message.content
-
-if __name__ == "__main__":
-    st.title("📝 Text2SQL Demo")
-
-    natural_query = st.text_input("Enter your question:", "List the title and release year of movies.")
 
     if st.button("Run"):
-        sql = generate_sql(natural_query)
-        query = clean_sql_output(sql)
-        st.code(query, language="sql")
-
         try:
-            rows = run_query(query)
-            df = pd.DataFrame(rows)
-            st.dataframe(df)
+            log_step("🎯 사용자 요청 시작")
+
+            # LangChain 체인 실행 (자동으로 벡터 검색 + LLM 실행)
+            sql = invoke_text_to_sql_chain(natural_query)
+
+            log_step(
+                "Step 6: SQL 정리 완료",
+                {
+                    "정리된_SQL": sql,
+                },
+            )
+
+            # SQL 코드 표시
+            st.code(sql, language="sql")
+
+            try:
+                log_step("Step 7: SQL 쿼리 실행 중...", {"SQL": sql})
+
+                # SQL 실행
+                rows = run_query(sql)
+                df = pd.DataFrame(rows)
+
+                log_step(
+                    "Step 8: 쿼리 실행 완료",
+                    {
+                        "반환된_행_수": len(rows),
+                        "컬럼_수": len(df.columns),
+                        "컬럼명": list(df.columns),
+                    },
+                )
+
+                # 결과 표시
+                st.dataframe(df)
+
+                log_step(
+                    "✅ 전체 파이프라인 완료",
+                    {
+                        "최종_결과_행수": len(rows),
+                        "처리_상태": "성공",
+                    },
+                )
+
+            except Exception as e:
+                log_step(
+                    "❌ 쿼리 실행 오류 발생",
+                    {
+                        "에러_타입": type(e).__name__,
+                        "에러_메시지": str(e),
+                    },
+                )
+                st.error(f"Error running query: {e}")
+
         except Exception as e:
-            st.error(f"Error running query: {e}")
+            log_step(
+                "❌ SQL 생성 오류 발생",
+                {
+                    "에러_타입": type(e).__name__,
+                    "에러_메시지": str(e),
+                },
+            )
+            st.error(f"Error generating SQL: {e}")
+
+
+if __name__ == "__main__":
+    main()
