@@ -153,8 +153,6 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 ---
 ## 초기 환경 셋팅
 
- 
-
 > 클론
 ```
 git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
@@ -175,12 +173,15 @@ source .venv/bin/activate
 docker compose up -d
 ```
 
+---
 
 >주의사항)
+
   -재실행시에 data 폴더를 제거하고 실행해주세요.
 
 ---
 >추가사항)
+
   -IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
   -test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
   -의존성 설치.
