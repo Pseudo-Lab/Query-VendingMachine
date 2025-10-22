@@ -17,15 +17,22 @@ DB_PASS = os.getenv("DB_PASS")
 DB_HOST = os.getenv("DB_HOST")
 DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
-DB_URL = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
-engine = create_engine(DB_URL, echo=True, future=True)
+DB_NAME_DVD = os.getenv("DB_NAME_DVD")
+
+# 메타(임베딩) DB: text2sqldb
+DB_URL_DVD = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME_DVD}"
+engine_dvd = create_engine(DB_URL_DVD, echo=True, future=True)
+
+# 실제 쿼리용 DB: dvdrental
+DB_URL_EMB = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+engine_emb = create_engine(DB_URL_EMB, echo=True, future=True)
 
 # OpenAI API 설정
 API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=API_KEY)
 
 
-def run_query(query: str, params: dict = None):
+def run_query(query: str, params: dict = None, dvd: bool = True):
     """
     SQL SELECT 쿼리 실행
 
@@ -36,12 +43,13 @@ def run_query(query: str, params: dict = None):
     Returns:
         list: 쿼리 결과를 딕셔너리 리스트로 반환
     """
+    engine = engine_dvd if dvd else engine_emb
     with engine.connect() as conn:
         result = conn.execute(text(query), params or {})
         return [dict(row._mapping) for row in result]
 
 
-def run_command(query: str, params: dict = None):
+def run_command(query: str, params: dict = None, dvd: bool = True):
     """
     SQL INSERT/UPDATE/DELETE 명령어 실행
 
@@ -49,6 +57,7 @@ def run_command(query: str, params: dict = None):
         query (str): 실행할 SQL 명령어
         params (dict, optional): 쿼리 파라미터
     """
+    engine = engine_dvd if dvd else engine_emb
     with engine.begin() as conn:
         conn.execute(text(query), params or {})
 
@@ -169,4 +178,5 @@ def insert_doc(name: str):
             embedding = EXCLUDED.embedding
         """,
         {"name": name, "description": doc_text, "embedding": embedding},
+        dvd=False,
     )
