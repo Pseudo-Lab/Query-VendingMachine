@@ -174,20 +174,46 @@ source .venv/bin/activate
 
 docker compose up -d
 ```
-db 컨테이너는 5432포트, streamlit은 8501포트로 실행됩니다.
+- db 컨테이너는 5432포트, streamlit은 8501포트로 실행됩니다.
 ```
 
 > 주의사항)
-  재실행시에 data 폴더를 제거하고 실행해주세요.
+  -재실행시에 data 폴더를 제거하고 실행해주세요.
 
 > 추가사항)
-  IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
-  test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
-  의존성 설치.
-  streamlit tabs 기능으로 두번째 탭에 실험환경 트래킹 환경 개발.
+  -IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
+  -test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
+  -의존성 설치.
+  -streamlit tabs 기능으로 두번째 탭에 실험환경 트래킹 환경 개발.
 
 
+---
 
+
+📁 ### 주요 디렉토리 구조 및 설명
+chains/
+자연어 → SQL 변환을 위한 LangChain 기반 파이프라인(체인) 모듈을 포함합니다.
+(예: RAG 체인, SQL 생성 체인 등)
+
+
+config/
+LLM, 데이터베이스 등 프로젝트 전역 설정 파일을 관리합니다.
+
+
+init/
+초기 데이터베이스 및 임베딩 테이블 생성, 초기화 스크립트가 위치합니다.
+
+
+prompts/
+LLM 프롬프트 템플릿을 별도 파일로 관리하여, 프롬프트 수정 및 버전관리가 용이합니다.
+
+
+retrievers/
+데이터베이스 테이블 메타정보 벡터 검색 등, LangChain Retriever 인터페이스 구현체가 위치합니다.
+
+
+utils/
+DB 유틸리티, 로깅 등 공통적으로 사용하는 함수 및 도구성 코드가 포함됩니다.
 ---
 >(참고) 테스트를 위한 주피터랩 커널
 ```
