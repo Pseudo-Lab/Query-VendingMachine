@@ -158,7 +158,6 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
 cd Query-VendingMachine
 ```
----
       
 >파이썬 가상환경
 ```
@@ -166,7 +165,6 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
----
 >컨테이너 실행
 ```
 
@@ -191,7 +189,7 @@ docker compose up -d
 ---
 
 
-### 📁 주요 디렉토리 구조 및 설명
+## 📁 주요 디렉토리 구조 및 설명
 #### chains/
 - 자연어 → SQL 변환을 위한 LangChain 기반 파이프라인(체인) 모듈을 포함합니다.
 (예: RAG 체인, SQL 생성 체인 등)
@@ -221,16 +219,11 @@ docker compose up -d
 # 설치
 pip install jupyterlab ipykernel
 ```
----
-
 
 ```
 # 커널연결
 python -m ipykernel install --user --name=Query-VendingMachine --display-name="Query-VendingMachine (venv)"
 ```
-
----
-
 
 ```
 # 실행
