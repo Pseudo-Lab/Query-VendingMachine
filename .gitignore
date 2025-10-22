@@ -4,5 +4,8 @@
 main.ipynb
 ./postgres-data
 __pycache__/
+.idea/
+data/
+init/.init_table_docs_done
 *.py[cod]
 *.pyc
