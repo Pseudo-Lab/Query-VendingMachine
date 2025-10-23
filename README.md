@@ -167,6 +167,7 @@ source .venv/bin/activate
 >컨테이너 실행
 ```
 # .env 폴더에 본인의 API KEY를 반드시 입력한 다음에 아래의 명령어를 실행해주세요.
+docker compose build --no-cache
 docker compose up -d
 ```
 
