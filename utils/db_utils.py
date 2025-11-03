@@ -19,11 +19,11 @@ DB_PORT = os.getenv("DB_PORT")
 DB_NAME = os.getenv("DB_NAME")
 DB_NAME_DVD = os.getenv("DB_NAME_DVD")
 
-# 메타(임베딩) DB: text2sqldb
+# 실제 쿼리 입력 데이터베이스 DB: dvdrental
 DB_URL_DVD = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME_DVD}"
 engine_dvd = create_engine(DB_URL_DVD, echo=True, future=True)
 
-# 실제 쿼리용 DB: dvdrental
+# 임베딩 데이터베이스 DB: text2sqldb
 DB_URL_EMB = f"postgresql+psycopg2://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 engine_emb = create_engine(DB_URL_EMB, echo=True, future=True)
 

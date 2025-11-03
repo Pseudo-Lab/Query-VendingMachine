@@ -171,6 +171,24 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
+>테스트셋 구축
+```
+# experiments 폴더에 테스트셋이 구축됩니다.
+python testset.py
+
+```
+
+>실험
+```
+# streamlit 실험결과 탭 내에서 실험을 진행할 수 있습니다.
+
+탭 내 버튼을 눌러 실험을 진행할 수 있습니다. 실험결과는 experiments/ 폴더에 각 실험번호 내에 저장됩니다.
+
+실험 진행 로그 확인 docker logs -f text2sql-web --tail 10
+
+```
+
+
 ---
 
 ## 주의사항)
@@ -213,6 +231,9 @@ docker compose up -d
 
 #### utils/
 - DB 유틸리티, 로깅 등 공통적으로 사용하는 함수 및 도구성 코드가 포함됩니다.
+
+#### experiments/
+- 실험에 사용될 테스트용 데이터셋과 방법론 별로 실험결과를 저장하는 경로입니다.
 
 ---
 

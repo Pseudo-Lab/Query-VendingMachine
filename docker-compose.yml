@@ -32,3 +32,21 @@ services:
 
     depends_on:
       - db
+
+  runner:
+    image: python:3.11-slim
+    container_name: text2sql-runner
+    restart: "no"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: >
+      /bin/bash -c "sleep 5 && python /app/main_test.py"
+    depends_on:
+      - db
+      - web
