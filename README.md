@@ -171,6 +171,14 @@ docker compose build --no-cache
 docker compose up -d
 ```
 
+>테스트셋 구축
+```
+# .env 폴더에 본인의 API KEY를 반드시 입력한 다음에 아래의 명령어를 실행해주세요.
+python testset.py
+
+```
+
+
 ---
 
 ## 주의사항)
@@ -213,6 +221,9 @@ docker compose up -d
 
 #### utils/
 - DB 유틸리티, 로깅 등 공통적으로 사용하는 함수 및 도구성 코드가 포함됩니다.
+
+#### experiments/
+- 실험에 사용될 테스트용 데이터셋과 방법론 별로 실험결과를 저장하는 경로입니다.
 
 ---
 
