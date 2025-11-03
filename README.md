@@ -173,8 +173,18 @@ docker compose up -d
 
 >테스트셋 구축
 ```
-# .env 폴더에 본인의 API KEY를 반드시 입력한 다음에 아래의 명령어를 실행해주세요.
+# experiments 폴더에 테스트셋이 구축됩니다.
 python testset.py
+
+```
+
+>실험
+```
+# streamlit 실험결과 탭 내에서 실험을 진행할 수 있습니다.
+
+탭 내 버튼을 눌러 실험을 진행할 수 있습니다. 실험결과는 experiments/ 폴더에 각 실험번호 내에 저장됩니다.
+
+실험 진행 로그 확인 docker logs -f text2sql-web --tail 10
 
 ```
 
