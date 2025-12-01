@@ -74,7 +74,8 @@ def test_phase3_llm_config():
         llm = get_llm()
         assert isinstance(llm, ChatOpenAI)
         print(f"✅ ChatOpenAI 인스턴스 생성 성공")
-        print(f"   - 모델: {llm.model_name}")
+        model_name = getattr(llm, "model_name", getattr(llm, "model", None))
+        print(f"   - 모델: {model_name}")
         print(f"   - Temperature: {llm.temperature}")
         
     except Exception as e:

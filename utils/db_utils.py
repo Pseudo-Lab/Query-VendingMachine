@@ -73,9 +73,18 @@ def get_embedding(text: str, model: str = "text-embedding-3-small") -> list[floa
     Returns:
         list[float]: 임베딩 벡터
     """
-    response = client.embeddings.create(input=text, model=model)
-    embedding = response.data[0].embedding
-    return embedding
+    try:
+        # OpenAI API v1.0+ 형식
+        response = client.embeddings.create(
+            input=text,  # 문자열 직접 전달
+            model=model
+        )
+        embedding = response.data[0].embedding
+        return embedding
+    except Exception as e:
+        print(f"임베딩 생성 오류: {e}")
+        # 에러 발생 시 빈 벡터 반환 (1536 차원)
+        return [0.0] * 1536
 
 
 def extract_ddl(table_name):

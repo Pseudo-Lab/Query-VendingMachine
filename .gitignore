@@ -1,11 +1,44 @@
+# Environment
 .env
 .venv
-.ipynb_checkpoints/
-main.ipynb
-./postgres-data
+venv/
+env/
+
+# Python
 __pycache__/
-.idea/
-data/
-init/.init_table_docs_done
 *.py[cod]
 *.pyc
+*.pyo
+*.pyd
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+main.ipynb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Data
+data/
+postgres-data/
+./postgres-data
+
+# Experiments
+experiments/evaluation/
+experiments/**/result.csv
+experiments/**/*.csv
+experiments/4way_comparison_result.csv
+
+# Init
+init/.init_table_docs_done
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

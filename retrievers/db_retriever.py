@@ -5,6 +5,7 @@ PostgreSQL pgvector를 기반으로 한 커스텀 Retriever를 구현합니다.
 기존 search_docs 함수를 LangChain Retriever 인터페이스로 래핑합니다.
 """
 from langchain_core.retrievers import BaseRetriever
+from langchain_core.callbacks import CallbackManagerForRetrieverRun
 from langchain_core.documents import Document
 from utils.db_utils import get_embedding, run_query, make_table_desc_dict
 from utils.logging_utils import log_step
@@ -24,7 +25,12 @@ class DVDRentalRetriever(BaseRetriever):
         """LangChain config"""
         arbitrary_types_allowed = True
 
-    def _get_relevant_documents(self, query: str) -> List[Document]:
+    def _get_relevant_documents(
+        self,
+        query: str,
+        *,
+        run_manager: CallbackManagerForRetrieverRun | None = None,
+    ) -> List[Document]:
         """
         질의와 유사한 관련 테이블 검색
 
@@ -86,6 +92,14 @@ class DVDRentalRetriever(BaseRetriever):
         ]
 
         return documents
+
+    async def _aget_relevant_documents(
+        self,
+        query: str,
+        *,
+        run_manager: CallbackManagerForRetrieverRun | None = None,
+    ) -> List[Document]:
+        return self._get_relevant_documents(query, run_manager=run_manager)
 
 
 def get_dvdrental_retriever(limit: int = 10) -> DVDRentalRetriever:

@@ -4,7 +4,6 @@ SQL 생성 기본 체인 모듈
 LCEL(LangChain Expression Language)을 사용하여
 프롬프트 + LLM을 조합한 SQL 생성 체인을 정의합니다.
 """
-from langchain_core.runnables import RunnablePassthrough
 from config.llm_config import get_llm
 from prompts.sql_generation_prompt import get_sql_generation_prompt
 

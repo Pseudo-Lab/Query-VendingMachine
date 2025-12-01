@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: text2sqldb
     ports:
-      - "5432:5432"
+      - "5440:5432"
     volumes:
       - ./data:/var/lib/postgresql/data
       - ./init/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
@@ -26,6 +26,13 @@ services:
       - "8501:8501"
     environment:
       - PYTHONPATH=/app
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=user
+      - DB_PASS=password
+      - DB_NAME=text2sqldb
+      - DB_NAME_DVD=dvdrental
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - ./:/app
     command: /bin/bash -c "python /app/init/init_table_docs.py && streamlit run main.py --server.port=8501 --server.address=0.0.0.0"

@@ -14,11 +14,12 @@ load_dotenv()
 API_KEY = os.getenv("OPENAI_API_KEY")
 
 # LangChain ChatOpenAI 인스턴스 생성
-# 모델: gpt-5-mini
+# 모델: gpt-4o-mini
 # temperature: 0.2 (낮은 값으로 일관된 SQL 생성)
 llm = ChatOpenAI(
-    model="gpt-5-mini",
+    model="gpt-4o-mini",
     api_key=API_KEY,
+    temperature=0.2,
 )
 
 
