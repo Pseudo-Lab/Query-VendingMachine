@@ -1,0 +1,19 @@
+[project]
+name = "query-vendingmachine"
+version = "0.1.0"
+description = "Text-to-SQL Query Vending Machine"
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit>=1.50.0",
+    "openai>=2.5.0",
+    "pandas>=2.3.0",
+    "numpy>=2.3.0",
+    "psycopg2-binary>=2.9.11",
+    "sqlalchemy>=2.0.0",
+    "python-dotenv>=1.1.0",
+    "langchain",
+    "langchain-openai",
+    "langchain-community",
+    "ipykernel>=7.0.0",
+    "tqdm>=4.67.0",
+]

@@ -1,7 +1,11 @@
 # 단일 정답에 대한 SQL 질의응답 테스트셋 생성 코드
-import os
+from pathlib import Path
 
 import pandas as pd
+
+# 스크립트 파일 기준 경로 설정
+SCRIPT_DIR = Path(__file__).parent
+PROJECT_ROOT = SCRIPT_DIR.parent
 
 data = [
     # 1단계 - 단일 테이블에 대한 집계 및 단순 조건 조회 (예를 들어 SELECT, FROM, WHERE 하나씩 사용.)
@@ -80,5 +84,7 @@ data = [
 
 if __name__=="__main__":
     df = pd.DataFrame(data, columns=["question", "sql", "label"])
-    csv_path = "../experiments/dvdrental_testset.csv"
+    csv_path = PROJECT_ROOT / "experiments" / "dvdrental_testset.csv"
+    csv_path.parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(csv_path, index=False, encoding="utf-8-sig")
+    print(f"Saved to {csv_path}")
