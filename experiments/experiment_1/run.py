@@ -12,6 +12,7 @@ def run():
     testset = pd.read_csv("experiments/dvdrental_testset.csv")
     question = testset["question"].tolist()
     infer = []
+    infer_sql = []
     for natural_query in question:
         try:
             sql = invoke_text_to_sql_chain(natural_query, )
@@ -19,6 +20,7 @@ def run():
             df = pd.DataFrame(rows)
             value = df.iloc[0,0] if not df.empty else None # 단일값 하드 코딩.
             infer.append(str(value) if value is not None else "")
+            infer_sql.append(sql)
         except Exception as e:
             log_step("❌ 오류 발생", {
                 "에러_타입": type(e).__name__,
@@ -27,5 +29,7 @@ def run():
             infer.append(None)
 
     testset["infer"] = infer
+    testset["infer_sql"] = infer_sql
     testset.to_csv("experiments/experiment_1/result.csv", index=False, encoding="utf-8-sig")
     return testset
+    

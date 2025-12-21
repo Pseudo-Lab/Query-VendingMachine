@@ -110,5 +110,51 @@ def invoke_text_to_sql_chain(question: str) -> str:
     return sql
 
 
+def get_prompt_preview(question: str) -> dict:
+    """
+    프롬프트 미리보기 - 실제 LLM에 전달되는 프롬프트 내용 반환
+    
+    Args:
+        question (str): 사용자의 자연어 질문
+    
+    Returns:
+        dict: 프롬프트 구성 요소 (context, primary_table, question, full_prompt)
+    """
+    retriever = get_dvdrental_retriever(limit=10)
+    prompt_template = get_sql_generation_prompt()
+    
+    # 리트리버 결과
+    docs = retriever.invoke(question)
+    context = format_docs(docs)
+    primary_table = docs[0].metadata['table_name'] if docs else ""
+    
+    # 검색된 테이블 목록
+    retrieved_tables = [
+        {"순위": i+1, "테이블명": doc.metadata['table_name'], "유사도_거리": f"{doc.metadata['distance']:.4f}"}
+        for i, doc in enumerate(docs)
+    ]
+    
+    # 프롬프트 생성
+    prompt_value = prompt_template.invoke({
+        "context": context,
+        "primary_table": primary_table,
+        "question": question
+    })
+    
+    # 메시지 추출
+    messages = prompt_value.to_messages()
+    system_prompt = messages[0].content if messages else ""
+    user_prompt = messages[1].content if len(messages) > 1 else ""
+    
+    return {
+        "question": question,
+        "primary_table": primary_table,
+        "retrieved_tables": retrieved_tables,
+        "context": context,
+        "system_prompt": system_prompt,
+        "user_prompt": user_prompt,
+    }
+
+
 # 모듈 로드 시 체인 인스턴스 생성
 text_to_sql_chain = create_text_to_sql_chain()

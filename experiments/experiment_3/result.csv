@@ -1,0 +1,176 @@
+﻿question,sql,label,infer,infer_sql
+이름이 Penelope인 배우는 총 몇 명인가?,SELECT COUNT(*) FROM actor WHERE first_name = 'Penelope';,4,4,SELECT COUNT(*) FROM actor WHERE first_name ILIKE 'Penelope';
+배우 데이터베이스에서 이름이 페넬로페인 사람의 수를 세어줘.,SELECT COUNT(*) FROM actor WHERE first_name = 'Penelope';,4,4,"SELECT COUNT(*) 
+FROM actor
+WHERE first_name ILIKE 'Penelope';"
+California인 주소의 개수를 구해줘.,SELECT COUNT(*) FROM address WHERE district = 'California';,9,9,"SELECT COUNT(*) AS address_count
+FROM address
+WHERE district = 'California';"
+캘리포니아 지역으로 등록된 주소가 몇 건인지 알려줘.,SELECT COUNT(*) FROM address WHERE district = 'California';,9,9,"SELECT COUNT(*) AS address_count
+FROM address
+WHERE district = 'California';"
+카테고리 ID가 1번인 카테고리의 이름은 무엇인가?,SELECT name FROM category WHERE category_id = 1;,Action,Action,"SELECT name
+FROM category
+WHERE category_id = 1;"
+식별 번호가 1인 영화 장르를 알려줘.,SELECT name FROM category WHERE category_id = 1;,Action,Documentary,"SELECT c.name AS genre
+FROM film f
+JOIN film_category fc ON fc.film_id = f.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE f.film_id = 1;"
+국가 ID가 44번인 도시의 총 개수는?,SELECT COUNT(*) FROM city WHERE country_id = 44;,60,60,"SELECT COUNT(*) AS total_cities
+FROM city
+WHERE country_id = 44;"
+44번 국가 코드에 소속된 도시가 몇 군데인지 카운트해.,SELECT COUNT(*) FROM city WHERE country_id = 44;,60,60,"SELECT COUNT(*) AS city_count
+FROM city
+WHERE country_id = 44;"
+비활성 고객의 수를 세어줘.,SELECT COUNT(*) FROM customer WHERE active = 0;,15,0,"SELECT COUNT(*) AS inactive_customer_count
+FROM customer
+WHERE activebool = false;"
+현재 활동 중이지 않은 손님은 총 몇 명이야?,SELECT COUNT(*) FROM customer WHERE active = 0;,15,440,"SELECT COUNT(DISTINCT r.customer_id) AS inactive_customers
+FROM rental r
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM rental r2
+  WHERE r2.customer_id = r.customer_id
+    AND r2.return_date IS NULL
+);"
+영화 테이블에서 상영 시간의 최댓값을 구해줘.,SELECT MAX(length) FROM film;,185,185,"SELECT MAX(length) AS max_length
+FROM film;"
+등록된 영화 중 가장 긴 러닝타임은 몇 분이야?,SELECT MAX(length) FROM film;,185,185,"SELECT MAX(length) AS max_length_minutes
+FROM film;"
+배우 ID가 1번인 배우가 출연한 영화의 총 편수는?,SELECT COUNT(*) FROM film_actor WHERE actor_id = 1;,19,19,"SELECT COUNT(DISTINCT fa.film_id) AS total_films
+FROM actor a
+LEFT JOIN film_actor fa ON a.actor_id = fa.actor_id
+WHERE a.actor_id = 1;"
+1번 배우와 연결된 영화 레코드는 몇 개가 있어?,SELECT COUNT(*) FROM film_actor WHERE actor_id = 1;,19,19,"SELECT COUNT(DISTINCT fa.film_id) AS film_count
+FROM film_actor AS fa
+WHERE fa.actor_id = 1;"
+카테고리 ID가 6번인 영화의 총 개수를 조회해.,SELECT COUNT(*) FROM film_category WHERE category_id = 6;,68,68,"SELECT COUNT(DISTINCT f.film_id) AS total_films
+FROM film f
+JOIN film_category fc ON fc.film_id = f.film_id
+WHERE fc.category_id = 6;"
+6번 장르로 분류된 영화가 몇 편인지 숫자로 알려줘.,SELECT COUNT(*) FROM film_category WHERE category_id = 6;,68,68,"SELECT COUNT(*) AS film_count
+FROM film f
+JOIN film_category fc ON fc.film_id = f.film_id
+WHERE fc.category_id = 6;"
+영화 ID가 1번인 영화의 전체 재고 수량은 몇 개인가?,SELECT COUNT(*) FROM inventory WHERE film_id = 1;,8,8,"SELECT COUNT(*) AS total_inventory
+FROM inventory
+WHERE film_id = 1;"
+매장에 있는 1번 영화의 총 개수를 세어줘.,SELECT COUNT(*) FROM inventory WHERE film_id = 1;,8,8,"SELECT COUNT(i.inventory_id) AS total_copies
+FROM film f
+JOIN inventory i ON i.film_id = f.film_id
+WHERE f.film_id = 1;"
+언어 ID가 1번인 언어의 이름은?,SELECT name FROM language WHERE language_id = 1;,English,English             ,SELECT name FROM language WHERE language_id = 1;
+1번 랭귀지 코드에 해당하는 언어 명칭을 출력해.,SELECT name FROM language WHERE language_id = 1;,English,English             ,SELECT name FROM language WHERE language_id = 1;
+결제 테이블에서 가장 큰 금액은 얼마인가?,SELECT MAX(amount) FROM payment;,11.99,11.99,"SELECT MAX(amount) AS max_amount
+FROM payment;"
+지금까지 발생한 결제 내역 중 최고 액수를 알려줘.,SELECT MAX(amount) FROM payment;,11.99,11.99,"SELECT MAX(amount) AS max_payment_amount
+FROM payment;"
+직원 ID가 1번인 직원이 처리한 대여 건수는 총 몇 개인가?,SELECT COUNT(*) FROM rental WHERE staff_id = 1;,8040,8040,"SELECT COUNT(*) AS total_rentals
+FROM rental
+WHERE staff_id = 1;"
+1번 스태프가 담당했던 렌탈 기록의 총합을 구해줘.,SELECT COUNT(*) FROM rental WHERE staff_id = 1;,8040,8040,"SELECT COUNT(*) AS total_rentals
+FROM rental
+WHERE staff_id = 1;"
+직원 ID가 2번인 직원의 이메일 주소는 무엇인가?,SELECT email FROM staff WHERE staff_id = 2;,Jon.Stephens@sakilastaff.com,Jon.Stephens@sakilastaff.com,"SELECT email
+FROM staff
+WHERE staff_id = 2;"
+2번 사원의 이메일 정보를 하나만 딱 보여줘.,SELECT email FROM staff WHERE staff_id = 2;,Jon.Stephens@sakilastaff.com,Jon.Stephens@sakilastaff.com,"SELECT email
+FROM staff
+WHERE staff_id = 2
+LIMIT 1;"
+매장 ID가 1번인 매장의 매니저 직원 ID는 몇 번인가?,SELECT manager_staff_id FROM store WHERE store_id = 1;,1,1,"SELECT manager_staff_id
+FROM store
+WHERE store_id = 1;"
+1호점을 관리하는 매니저의 사원 번호를 알려줘.,SELECT manager_staff_id FROM store WHERE store_id = 1;,1,1,"SELECT st.staff_id
+FROM store s
+JOIN staff st ON st.staff_id = s.manager_staff_id
+WHERE s.store_id = 1;"
+'Academy Dinosaur' 영화의 언어 이름은 무엇인가?,SELECT L.name FROM film AS F JOIN language AS L ON F.language_id = L.language_id WHERE F.title = 'Academy Dinosaur';,English,English             ,"SELECT l.name
+FROM film f
+JOIN language l ON f.language_id = l.language_id
+WHERE f.title = 'Academy Dinosaur';"
+제목이 'ACADEMY DINOSAUR'인 영화의 언어 명칭을 알려줘.,SELECT L.name FROM film AS F JOIN language AS L ON F.language_id = L.language_id WHERE F.title = 'Academy Dinosaur';,English,,"SELECT CASE f.language_id
+           WHEN 1 THEN 'English'
+           WHEN 2 THEN 'Italian'
+           WHEN 3 THEN 'Japanese'
+           WHEN 4 THEN 'Mandarin'
+           WHEN 5 THEN 'French'
+           WHEN 6 THEN 'German'
+           ELSE 'Unknown'
+       END AS language_name
+FROM film f
+WHERE f.title = 'ACADEMY DINOSAUR';"
+배우 'Penelope Guiness'가 출연한 영화의 총 개수를 구해줘.,SELECT COUNT(FA.film_id) FROM film_actor AS FA JOIN actor AS A ON FA.actor_id = A.actor_id WHERE A.first_name = 'Penelope' AND A.last_name = 'Guiness';,19,19,"SELECT COUNT(DISTINCT fa.film_id) AS total_films
+FROM actor a
+JOIN film_actor fa ON a.actor_id = fa.actor_id
+WHERE a.first_name = 'Penelope' AND a.last_name = 'Guiness';"
+성(last_name)이 Guiness이고 이름이 Penelope인 배우가 출연한 영화는 총 몇 편인가?,SELECT COUNT(FA.film_id) FROM film_actor AS FA JOIN actor AS A ON FA.actor_id = A.actor_id WHERE A.first_name = 'Penelope' AND A.last_name = 'Guiness';,19,19,"SELECT COUNT(DISTINCT fa.film_id) AS film_count
+FROM actor a
+JOIN film_actor fa ON fa.actor_id = a.actor_id
+WHERE a.first_name = 'Penelope' AND a.last_name = 'Guiness';"
+가장 많은 금액을 지출한 고객의 고객 ID는 무엇인가?,SELECT customer_id FROM payment GROUP BY customer_id ORDER BY SUM(amount) DESC LIMIT 1;,148,148,"SELECT customer_id
+FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+LIMIT 1;"
+총 결제 금액이 가장 높은 고객의 식별 번호를 알려줘.,SELECT customer_id FROM payment GROUP BY customer_id ORDER BY SUM(amount) DESC LIMIT 1;,148,148,"SELECT customer_id
+FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+LIMIT 1;"
+Canada에 거주하는 고객의 총 수는 몇 명인가?,SELECT COUNT(C.customer_id) FROM customer AS C JOIN address AS A ON C.address_id = A.address_id JOIN city AS CI ON A.city_id = CI.city_id JOIN country AS CO ON CI.country_id = CO.country_id WHERE CO.country = 'Canada';,5,5,"SELECT COUNT(*) AS total_customers
+FROM customer c
+JOIN address a ON c.address_id = a.address_id
+JOIN city ci ON a.city_id = ci.city_id
+JOIN country co ON ci.country_id = co.country_id
+WHERE co.country = 'Canada';"
+'Canada' 국가에 주소를 둔 손님은 모두 몇 명인지 세어줘.,SELECT COUNT(T1.customer_id) FROM customer AS T1 INNER JOIN address AS T2 ON T1.address_id = T2.address_id INNER JOIN city AS T3 ON T2.city_id = T3.city_id INNER JOIN country AS T4 ON T3.country_id = T4.country_id WHERE T4.country = 'Canada';,5,5,"SELECT COUNT(c.customer_id) AS customer_count
+FROM customer c
+JOIN address a ON c.address_id = a.address_id
+JOIN city ci ON a.city_id = ci.city_id
+JOIN country co ON ci.country_id = co.country_id
+WHERE co.country = 'Canada';"
+직원 Mike Hillyer가 관리하는 매장의 총 재고 수량은 몇 개인가?,SELECT COUNT(I.inventory_id) FROM inventory AS I JOIN store AS S ON I.store_id = S.store_id JOIN staff AS ST ON S.manager_staff_id = ST.staff_id WHERE ST.first_name = 'Mike' AND ST.last_name = 'Hillyer';,2270,2270,"SELECT COUNT(i.inventory_id) AS total_inventory
+FROM store s
+JOIN staff st ON s.manager_staff_id = st.staff_id
+JOIN inventory i ON i.store_id = s.store_id
+WHERE st.first_name = 'Mike'
+  AND st.last_name = 'Hillyer';"
+매니저 이름이 'Mike Hillyer'인 매점의 재고 레코드는 총 몇 건인가?,SELECT COUNT(T1.inventory_id) FROM inventory AS T1 INNER JOIN store AS T2 ON T1.store_id = T2.store_id INNER JOIN staff AS T3 ON T2.manager_staff_id = T3.staff_id WHERE T3.first_name = 'Mike' AND T3.last_name = 'Hillyer';,2270,2270,"SELECT COUNT(*) AS total_inventory_records
+FROM store s
+JOIN staff st ON st.staff_id = s.manager_staff_id
+JOIN inventory i ON i.store_id = s.store_id
+WHERE st.first_name = 'Mike' AND st.last_name = 'Hillyer';"
+대여 건수가 가장 많은 직원의 ID는 무엇인가?,SELECT staff_id FROM rental GROUP BY staff_id ORDER BY COUNT(rental_id) DESC LIMIT 1;,1,1,"SELECT staff_id
+FROM (
+  SELECT staff_id, COUNT(*) AS rental_count,
+         RANK() OVER (ORDER BY COUNT(*) DESC) AS rnk
+  FROM rental
+  GROUP BY staff_id
+) t
+WHERE rnk = 1;"
+총 렌탈 건수가 가장 높은 직원 한 명의 식별 번호를 알려줘.,SELECT staff_id FROM rental GROUP BY staff_id ORDER BY COUNT(rental_id) DESC LIMIT 1;,1,1,"SELECT staff_id
+FROM rental
+GROUP BY staff_id
+ORDER BY COUNT(*) DESC, staff_id ASC
+LIMIT 1;"
+'Action' 장르에 속하는 영화 중 상영 시간이 가장 긴 영화의 제목은?,SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Action' ORDER BY T1.length DESC LIMIT 1;,Darn Forrester,Darn Forrester,"SELECT f.title
+FROM film f
+JOIN film_category fc ON fc.film_id = f.film_id
+JOIN category c ON c.category_id = fc.category_id
+WHERE c.name = 'Action'
+  AND f.length = (
+    SELECT MAX(f2.length)
+    FROM film f2
+    JOIN film_category fc2 ON fc2.film_id = f2.film_id
+    JOIN category c2 ON c2.category_id = fc2.category_id
+    WHERE c2.name = 'Action'
+  );"
+액션 카테고리에 있는 영화 중 러닝타임이 제일 긴 영화 제목을 하나만 출력해.,SELECT T1.title FROM film AS T1 INNER JOIN film_category AS T2 ON T1.film_id = T2.film_id INNER JOIN category AS T3 ON T2.category_id = T3.category_id WHERE T3.name = 'Action' ORDER BY T1.length DESC LIMIT 1;,Darn Forrester,Darn Forrester,"SELECT f.title
+FROM film AS f
+JOIN film_category AS fc ON f.film_id = fc.film_id
+JOIN category AS c ON fc.category_id = c.category_id
+WHERE c.name = 'Action'
+ORDER BY f.length DESC, f.title
+LIMIT 1;"
