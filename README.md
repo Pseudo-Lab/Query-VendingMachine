@@ -1,254 +1,196 @@
-<h1 align="center"> 🪏 Query VendingMachine(쿼리 자판기) </h1>
+# 🪏 Query VendingMachine - Text2SQL 실험
 
-<div align="center">
-<a href="https://pseudo-lab.com"><img src="https://img.shields.io/badge/PseudoLab-S10-3776AB" alt="PseudoLab"/></a>
-<a href="https://discord.gg/EPurkHVtp2"><img src="https://img.shields.io/badge/Discord-BF40BF" alt="Discord Community"/></a>
-<a href="https://github.com/Pseudo-Lab/10th-template/stargazers"><img src="https://img.shields.io/github/stars/Pseudo-Lab/10th-template" alt="Stars Badge"/></a>
-<a href="https://github.com/Pseudo-Lab/10th-template/network/members"><img src="https://img.shields.io/github/forks/Pseudo-Lab/10th-template" alt="Forks Badge"/></a>
-<a href="https://github.com/Pseudo-Lab/10th-template/pulls"><img src="https://img.shields.io/github/issues-pr/Pseudo-Lab/10th-template" alt="Pull Requests Badge"/></a>
-<a href="https://github.com/Pseudo-Lab/10th-template/issues"><img src="https://img.shields.io/github/issues/Pseudo-Lab/10th-template" alt="Issues Badge"/></a>
-<a href="https://github.com/Pseudo-Lab/10th-template/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Pseudo-Lab/10th-template?color=2b9348"></a>
-<a href="https://hits.seeyoufarm.com"><img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fpseudo-lab%2F10th-template&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false"/></a>
-</div>
-<br>
-
-<!-- sheilds: https://shields.io/ -->
-<!-- hits badge: https://hits.seeyoufarm.com/ -->
-
-> Welcome to Text2SQL Study repository! We aim to explore natural language interfaces to databases, offering tools and frameworks for SQL learning, prompt engineering, and query evaluation. Join us in advancing the field of Text2SQL through open collaboration and innovation!
-
-🚀 Query VendingMachine — 가짜연구소 Text2Sql 프로젝트
-
-
-## 🌟 프로젝트 목표 (Project Vision)
-### "Text2SQL 기초 구현부터 실험까지 함께 공부하는 Text2Sql 스터디"
-- Text2SQL의 환경을 직접 구축
-- 실무, 논문 아이디어를 적용한 구현 및 실험
-- 실제 업무의 적용할 아이디어와 노하우 정리
-- [프로젝트 계획 노션 페이지](https://www.notion.so/chanrankim/Text2Sql-255963ffa3ee80a688b7c082b905e551?d=1ba963ffa3ee83db9e6f83f9a30be927)
-
-## 🧑 역동적인 팀 소개 (Dynamic Team)
-
-| 역할          | 이름 | 기술 스택 배지                                                                                                                                                                   | 주요 관심 분야       |
-|---------------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
-| **Project Manager** | 이청록 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                       | AI/추천 서비스 엔지니어링 |
-| **Member** | 변홍균 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57) | 데이터 분석, 엔지니어링  |
-| **Member** | 양문규 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                            | 머신러닝 엔지니어      |
-| **Member** | 박지우 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                         | 데이터 엔지니어링      |
-| **Member** | 이현준 | ![Python](https://img.shields.io/badge/Python-Expert-3776AB) ![SQL](https://img.shields.io/badge/SQL-Advanced-003B57)                                                    | LLM 프로덕트 전문가   |
-
-
-## 🚀 프로젝트 로드맵 (Project Roadmap)
-```mermaid
-gantt
-    title 2025 AI 프로젝트 여정
-    section 핵심 마일스톤
-    이론 연구       :a1, 2025-09-09, 28d
-    MVP 개발        :a2, after a1, 56d
-    프로덕션 적용    :a3, after a2, 28d
-    section 부가 활동
-    대외모임     :2025-09-30, 1d
-    대외모임        :2025-10-28, 1d
-```
-
-
-## 🛠️ 우리의 개발 문화 (Our Development Culture)
-**우리의 개발 문화**  
-```python
-class CollaborationFramework:
-    def __init__(self):
-        self.tools = {
-            'communication': 'Discord',
-            'version_control': 'GitHub Projects',
-            'ci/cd': 'GitHub Actions',
-            'docs': 'Github Wiki'
-        }
-    
-    def workflow(self):
-        return """주간 사이클:
-        1️⃣ 화요일: 리뷰 및 공유"""
-```
-
-
-## 📈 성과 지표 (Achievement Metrics)
-**2024 주요 KPI**  
-| 지표                     | 목표치 | 현재 달성률 |
-|--------------------------|--------|-------------|
-| 커밋 수                    | 500  | 5%         |
-| 쿼리 정확도                 | 90%    | 50%         | 
-
-
-## 💻 주차별 활동 (Activity History)
-
-| 날짜 | 내용 | 결과물                  | 
-| -------- | -------- |----------------------|
-| 2025/09/09 |  1주차      | OT                   |
-| 2025/09/16 |  2주차 | 리서치 결과 공유            | 
-| 2025/09/23 |  매지컬 위크 | t2s 환경 리서치 및 개발 결과 공유 | 
-| 2025/09/30 |  3주차 | t2s 환경 리서치 및 개발 결과 공유 | 
-| 2025/10/07 |  4주차 | t2s 환경 리서치 및 개발 결과 공유 | 
-| 2025/10/14 |  5주차 | t2s 환경 리서치 및 개발 결과 공유 | 
-| 2025/10/21 |  6주차 | t2s 환경 리서치 및 개발 결과 공유 | 
-| 2025/10/28 |  7주차 | 미정                   | 
-| 2025/11/04 |  8주차 | 미정                   | 
-| 2025/11/11 |  9주차 | 미정                   | 
-| 2025/11/18 |  10주차 | 미정                   | 
-| 2025/11/25 |  11주차 | 미정                   | 
-| 2025/12/02 |  12주차 | 미정                   | 
-| 2025/12/09 |  13주차 | 미정                   | 
-| 2025/12/16 |  14주차 | 미정                   | 
-| 2025/12/23 |  15주차 | 미정                   | 
-| 2025/12/30 |  16주차 | 미정                   | 
-
-
-
-
-## 💡 학습 자원 (Learning Resources)
-**우리가 만든 지식 허브**  
-- github wiki
-
-
-## 🌱 참여 안내 (How to Engage)
-- 빌더로 참여 — 프로젝트 기획·운영·개발 주도
-- 러너로 참여 — 연구·개발 등 실행
-- 청강 참여 — 공개 세션 참여 가능
-
-❗️참여 링크: [가짜연구소 디스코드](https://discord.gg/EPurkHVtp2)
-❗️커뮤니케이션 채널: 디스코드 #{{채널명}}
-
-**누구나 청강을 통해 모임을 참여하실 수 있습니다.**  
-1. 특별한 신청 없이 정기 모임 시간에 맞추어 디스코드 #Room-GH 채널로 입장
-2. Magical Week 중 행사에 참가
-3. Pseudo Lab 행사에서 만나기
-
-## Acknowledgement 🙏
-
-이 프로젝트는 가짜연구소 Open Academy로 진행됩니다.
-여러분의 참여와 기여가 ‘우연한 혁명(Serendipity Revolution)’을 가능하게 합니다. 모두에게 깊은 감사를 전합니다.
-OOO is developed as part of Pseudo-Lab's Open Research Initiative. Special thanks to our contributors and the open source community for their valuable insights and contributions.
-
-## About Pseudo Lab 👋🏼</h2>
-
-[Pseudo-Lab](https://pseudo-lab.com/) is a non-profit organization focused on advancing machine learning and AI technologies. Our core values of Sharing, Motivation, and Collaborative Joy drive us to create impactful open-source projects. With over 5k+ researchers, we are committed to advancing machine learning and AI technologies.
-
-<h2>Contributors 😃</h2>
-<a href="https://github.com/Pseudo-Lab/10th-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Pseudo-Lab/10th-template" />
-</a>
-<br><br>
-
-<h2>License 🗞</h2>
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
-
-🚩 추가 팁 (Usage Tips)
-- 각 항목 내 {{ }} 표시된 부분을 프로젝트에 맞게 꼭 수정하세요.
-- 불필요한 프로젝트 유형 예시는 제거하거나 교체해 명확하게 하세요.
-- 로드맵과 활동내역 부분에 Mermaid 다이어그램 등을 이용해 시각적으로 표현하는 것을 추천합니다.
-- 체크박스(✅)와 표를 적절히 활용하면 진행 상황 한눈에 파악이 쉽습니다.
-- ‘빌더’와 ‘러너’의 역할 분담과 상호 피드백 문화 강화에 README 내 문장으로 강조를 절대 잊지 마세요.
-- README가 단순 안내서 이상으로 공동체 철학과 가치를 담는 협업 선언문임을 인지하고, 누구나 읽고 이해하기 쉽도록 간결 명료하게 작성하세요.
+> 자연어를 SQL로 변환하는 RAG 기반 Text2SQL 시스템의 다양한 방법론 실험
 
 ---
-## 초기 환경 셋팅
 
-> 클론
+## 📊 실험 개요
+
+DVD 대여 데이터베이스(dvdrental)를 대상으로 자연어 질문을 SQL 쿼리로 변환하는 **3가지 방법론**을 비교 실험합니다.
+
+| 실험 | 핵심 아이디어 | 임베딩 모델 | LLM |
+|------|-------------|------------|-----|
+| 실험 1 | 기본 RAG | text-embedding-3-small | gpt-5-mini |
+| 실험 2 | 컬럼 메타정보 추가 | text-embedding-3-small | gpt-5-mini |
+| 실험 3 | 모델 업그레이드 | text-embedding-3-large | gpt-5 |
+
+---
+
+## 🧪 실험 1: 기본 RAG 파이프라인
+
+### 아이디어
+가장 기본적인 RAG(Retrieval-Augmented Generation) 구조로 Text2SQL을 구현합니다.
+
+### 파이프라인
 ```
-git clone git@github.com:Pseudo-Lab/Query-VendingMachine.git
-cd Query-VendingMachine
-```
-      
->파이썬 가상환경
-```
-python -m venv .venv
-source .venv/bin/activate
+자연어 질문
+    ↓
+[1] 질문 임베딩 (text-embedding-3-small)
+    ↓
+[2] 벡터 검색 (pgvector) - 유사한 테이블 10개 검색
+    ↓
+[3] 프롬프트 구성
+    - 검색된 테이블 스키마 (DDL)
+    - 테이블 설명
+    - 사용자 질문
+    ↓
+[4] LLM SQL 생성 (gpt-5-mini)
+    ↓
+[5] SQL 실행 & 결과 반환
 ```
 
->컨테이너 실행
+### 프롬프트 구조
+```xml
+<주요테이블>검색 1위 테이블</주요테이블>
+<질문>사용자 질문</질문>
+<사용가능한테이블>
+  <Table: actor>DDL 정보...</Table>
+  <Table: film>DDL 정보...</Table>
+  ...
+</사용가능한테이블>
 ```
-# .env 폴더에 본인의 API KEY를 반드시 입력한 다음에 아래의 명령어를 실행해주세요.
+
+### 한계점
+- 테이블 스키마만 제공하므로 **실제 값**을 알 수 없음
+- 예: "Penelope"라는 배우가 있는지, 어떤 컬럼에 있는지 모름
+- 값 매칭 오류 가능성 높음
+
+---
+
+## 🧪 실험 2: 컬럼 메타정보 활용
+
+### 아이디어
+테이블 스키마에 **컬럼별 실제 값 분포 정보**를 추가하여 더 정확한 SQL 생성을 유도합니다.
+
+### 추가되는 컬럼 메타정보
+```python
+{
+    "actor": {
+        "first_name": {
+            "distinct_count": 128,
+            "is_categorical": True,
+            "top_values": ["Penelope", "Nick", "Ed", "Jennifer", ...],
+        },
+        "actor_id": {
+            "distinct_count": 200,
+            "is_id": True,
+            "range": [1, 200],
+        }
+    }
+}
+```
+
+### 파이프라인
+```
+자연어 질문
+    ↓
+[1] 질문 임베딩
+    ↓
+[2] 벡터 검색 (상위 10개 테이블)
+    ↓
+[3] 프롬프트 구성 ⭐ 차이점
+    - 검색된 테이블 스키마
+    - 테이블 설명
+    - ⭐ 컬럼별 메타정보 (값 분포, top values, 범위 등)
+    - 사용자 질문
+    ↓
+[4] LLM SQL 생성 (gpt-5-mini)
+    ↓
+[5] SQL 실행 & 결과 반환
+```
+
+### 프롬프트 구조
+```xml
+<PrimaryTable>actor</PrimaryTable>
+<Question>사용자 질문</Question>
+<AvailableTables>DDL 정보...</AvailableTables>
+<ColumnMetadata>
+  actor.first_name: categorical, top_values=[Penelope, Nick, ...]
+  actor.last_name: categorical, top_values=[Guiness, Wahlberg, ...]
+  ...
+</ColumnMetadata>
+```
+
+### 기대 효과
+- 실제 존재하는 값으로 정확한 WHERE 조건 생성
+- Categorical vs Numeric 컬럼 구분 가능
+- ID 컬럼 인식으로 불필요한 조건 방지
+
+---
+
+## 🧪 실험 3: 모델 업그레이드
+
+### 아이디어
+실험 1과 동일한 방법론에서 **모델 스펙만 업그레이드**하여 순수 모델 성능 차이를 측정합니다.
+
+### 변경 사항
+| 구분 | 실험 1 | 실험 3 |
+|------|--------|--------|
+| 임베딩 | text-embedding-3-small (1536차원) | text-embedding-3-large (3072차원) |
+| LLM | gpt-5-mini | gpt-5 |
+
+### 파이프라인
+실험 1과 동일 (모델만 변경)
+
+### 기대 효과
+- 더 정확한 시맨틱 검색 (임베딩 품질 향상)
+- 더 정확한 SQL 생성 (LLM 추론 능력 향상)
+- 방법론 개선 없이 모델 성능만으로 얼마나 향상되는지 측정
+
+### 주의사항
+> ⚠️ 현재 구현에서는 기존 table_docs가 small 모델(1536차원)로 임베딩되어 있어,  
+> 질문 임베딩만 large로 변경 시 차원 불일치 문제 발생.  
+> 정확한 비교를 위해서는 table_docs도 large 모델로 재임베딩 필요.
+
+---
+
+## 📈 실험 결과 비교
+
+Streamlit 웹 UI의 **결과 비교** 탭에서 확인 가능:
+- 정확도 비교 (정답/오답 수)
+- 오답 분석 (틀린 문제별 상세 내용)
+- 문항별 정답 현황 비교
+
+---
+
+## 🚀 실행 방법
+
+```bash
+# 1. 환경 설정
+cp .env.example .env  # OPENAI_API_KEY 설정
+
+# 2. Docker 실행
 docker compose build --no-cache
 docker compose up -d
+
+# 3. 웹 UI 접속
+open http://localhost:8501
 ```
-
->테스트셋 구축
-```
-# experiments 폴더에 테스트셋이 구축됩니다.
-python testset.py
-
-```
-
->실험
-```
-# streamlit 실험결과 탭 내에서 실험을 진행할 수 있습니다.
-
-탭 내 버튼을 눌러 실험을 진행할 수 있습니다. 실험결과는 experiments/ 폴더에 각 실험번호 내에 저장됩니다.
-
-실험 진행 로그 확인 docker logs -f text2sql-web --tail 10
-
-```
-
 
 ---
 
-## 주의사항)
+## 📁 프로젝트 구조
 
-  - 재실행시에 data 폴더를 반드시 제거하고 실행해주세요.
-
-  - 재실행시에 init/.init_table_docs_done 파일을 반드시 제거하고 실행해주세요.
-
----
-## 추가사항)
-
-  -IMPLEMENTATION_SUMMARY.md, LANGCHAIN_MIGRATION.md 파일에 구현 요약 및 LangChain 마이그레이션 관련 내용은 추후 제거 예정.
-  -test_langchain_integration.py 파일은 LangChain 통합 테스트 용도로 추후 업데이트 예정.
-  -의존성 설치.
-  -streamlit tabs 기능으로 두번째 탭에 실험환경 트래킹 환경 개발.
-
-
----
-
-
-## 📁 주요 디렉토리 구조 및 설명
-#### chains/
-- 자연어 → SQL 변환을 위한 LangChain 기반 파이프라인(체인) 모듈을 포함합니다.
-(예: RAG 체인, SQL 생성 체인 등)
-
-#### config/
-- LLM, 데이터베이스 등 프로젝트 전역 설정 파일을 관리합니다.
-
-
-#### init/
-- 초기 데이터베이스 및 임베딩 테이블 생성, 초기화 스크립트가 위치합니다.
-
-
-#### prompts/
-- LLM 프롬프트 템플릿을 별도 파일로 관리하여, 프롬프트 수정 및 버전관리가 용이합니다.
-
-
-#### retrievers/
-- 데이터베이스 테이블 메타정보 벡터 검색 등, LangChain Retriever 인터페이스 구현체가 위치합니다.
-
-#### utils/
-- DB 유틸리티, 로깅 등 공통적으로 사용하는 함수 및 도구성 코드가 포함됩니다.
-
-#### experiments/
-- 실험에 사용될 테스트용 데이터셋과 방법론 별로 실험결과를 저장하는 경로입니다.
+```
+experiments/
+├── dvdrental_testset.csv    # 테스트셋 (질문 + 정답)
+├── experiment_1/
+│   ├── run.py               # 실험 1 실행 코드
+│   └── result.csv           # 실험 1 결과
+├── experiment_2/
+│   ├── run.py               # 실험 2 실행 코드
+│   ├── table_meta.pkl       # 컬럼 메타정보 캐시
+│   └── result.csv           # 실험 2 결과
+└── experiment_3/
+    ├── run.py               # 실험 3 실행 코드
+    └── result.csv           # 실험 3 결과
+```
 
 ---
 
-## (참고) 테스트를 위한 주피터랩 커널
-```
-# 설치
-pip install jupyterlab ipykernel
-```
+## 🔮 향후 실험 아이디어
 
-```
-# 커널연결
-python -m ipykernel install --user --name=Query-VendingMachine --display-name="Query-VendingMachine (venv)"
-```
-
-```
-# 실행
-jupyter lab
-```
+- **Few-shot 예시 추가**: 유사 질문-SQL 쌍을 프롬프트에 포함
+- **Self-correction**: 생성된 SQL 실행 후 오류 시 재생성
+- **Query Decomposition**: 복잡한 질문을 단계별로 분해
+- **Fine-tuning**: 도메인 특화 SQL 생성 모델 학습
