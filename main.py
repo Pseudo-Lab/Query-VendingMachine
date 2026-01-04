@@ -7,6 +7,7 @@ from chains.text_to_sql_chain import invoke_text_to_sql_chain, get_prompt_previe
 from experiments.experiment_1.run import run as ex1_run
 from experiments.experiment_2.run import run as ex2_run
 from experiments.experiment_3.run import run as ex3_run
+from experiments.experiment_4.run import run as ex4_run
 from utils import run_query, log_step
 
 
@@ -73,7 +74,7 @@ def display_accuracy_metrics(df: pd.DataFrame):
 def main():
     st.title("📝 Text2SQL Demo with LangChain")
 
-    tabs = st.tabs(["Text2SQL", "실험결과 1", "실험결과 2", "실험결과 3", "📊 결과 비교"])
+    tabs = st.tabs(["Text2SQL", "실험결과 1", "실험결과 2", "실험결과 3", "실험결과 4", "📊 결과 비교"])
 
     with tabs[0]:
         natural_query = st.text_input(
@@ -249,8 +250,53 @@ def main():
                     st.divider()
                     st.dataframe(st.session_state["experiment_3"])
 
-    # ========== 결과 비교 탭 ==========
     with tabs[4]:
+        st.header("실험결과_4")
+        st.write(": **2단계 Text2SQL** (벡터 검색 없이 LLM 기반 테이블 선택)")
+        st.info("""💡 **핵심 아이디어**
+        
+1️⃣ **1단계 - 테이블 선택**: 모든 테이블 스키마 + 조인 관계를 프롬프트에 넣고 LLM이 필요한 테이블 선택
+2️⃣ **2단계 - SQL 생성**: 선택된 테이블의 상세 컬럼 정보 + 실제 값들로 SQL 생성
+
+✅ 벡터 검색의 시맨틱 불일치 문제 해결
+✅ 대소문자/띄어쓰기 등 정확한 값 매칭 가능
+        """)
+        
+        csv_path_4 = "experiments/experiment_4/result.csv"
+        meta_path_4 = "experiments/experiment_4/table_meta.pkl"
+
+        # 테이블 메타정보 미리보기 (pickle)
+        if os.path.exists(meta_path_4):
+            with st.expander("📊 테이블 메타정보 미리보기 (pickle)"):
+                import pickle
+                with open(meta_path_4, "rb") as f:
+                    meta = pickle.load(f)
+                table_name = st.selectbox("테이블 선택", list(meta.keys()), key="exp4_table")
+                if table_name:
+                    st.json(meta[table_name])
+
+        if os.path.exists(csv_path_4):
+            df = pd.read_csv(csv_path_4)
+            if "experiment_4" not in st.session_state:
+                st.session_state["experiment_4"] = df
+            
+            # 정확도 표시
+            display_accuracy_metrics(st.session_state["experiment_4"])
+            st.divider()
+            
+            st.dataframe(st.session_state["experiment_4"])
+        else:
+            st.info("아직 실험 결과가 없습니다.")
+            if st.button("실험 실행하기", key="run_exp4"):
+                with st.spinner("실험 4 실행 중... (2단계 Text2SQL)"):
+                    df = ex4_run()
+                    st.session_state["experiment_4"] = df
+                    display_accuracy_metrics(df)
+                    st.divider()
+                    st.dataframe(st.session_state["experiment_4"])
+
+    # ========== 결과 비교 탭 ==========
+    with tabs[5]:
         st.header("📊 실험 결과 비교")
         
         # 각 실험 결과 로드
@@ -259,6 +305,7 @@ def main():
             "실험 1": "experiments/experiment_1/result.csv",
             "실험 2": "experiments/experiment_2/result.csv",
             "실험 3": "experiments/experiment_3/result.csv",
+            "실험 4": "experiments/experiment_4/result.csv",
         }
         
         for exp_name, path in exp_paths.items():
